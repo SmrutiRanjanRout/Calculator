@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MyCal</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            border: 2px solid black;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .box input[type="text"],
+        .box input[type="submit"] {
+            width: calc(100% - 20px);
+            padding: 5px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+        .box input[type="submit"] {
+            background-color: green;
+            color: white;
+        }
+        .box input[type="button"].back {
+            background-color: #ffc107;
+            color: white;
+        }
+        .box input[type="button"] {
+
+            background-color: rgb(93, 38, 247);
+            color: white;
+        }
+        .textformat{
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        function add_number() {
+            var first_number = parseInt(document.getElementById("fno").value);
+            var second_number = parseInt(document.getElementById("sno").value);
+
+            var sum = first_number + second_number;
+            var difference = first_number - second_number;
+            var quotient = first_number / second_number;
+            var remainder = first_number % second_number;
+            var product = first_number * second_number;
+
+            document.getElementById("sum").value = sum;
+            document.getElementById("difference").value = difference;
+            document.getElementById("quotient").value = quotient;
+            document.getElementById("product").value = product;
+        }
+        function refresh_form() {
+            document.getElementById("fno").value = '';
+            document.getElementById("sno").value = '';
+            document.getElementById("sum").value = '';
+
+            document.getElementById("difference").value = '';
+            document.getElementById("quotient").value = '';
+            document.getElementById("product").value = '';
+
+        }
+        function checkNum(x) {
+
+            var s_len = x.value.length;
+            var s_charcode = 0;
+            for (var s_i = 0; s_i < s_len; s_i++) {
+                s_charcode = x.value.charCodeAt(s_i);
+                if (!((s_charcode >= 48 && s_charcode <= 57))) {
+                    alert("Only Numeric Values Allowed");
+                    x.value = '';
+                    x.focus();
+                    return false;
+                }
+            }
+            return true;
+        }
+        function goBack() 
+        {
+            window.location.replace("intermediate.html");
+        }
+        function logout_form() {
+            window.location.replace("login.html");
+        }
+    </script>
+</head>
+
+<body>
+    <div class="box">
+        <form method="post" onsubmit="return false;">
+            <u>
+                <h2>Welcome to MyCal</h2>
+            </u>
+            <p>
+                <label for="fno">First Number:</label>
+                <input class="textformat" type="text" id="fno" name="fno" onChange="checkNum(this)">
+            </p>
+            <p>
+                <label for="sno">Second Number:</label>
+                <input class="textformat" type="text" id="sno" name="sno" onChange="checkNum(this)">
+            </p>
+            <p>
+                <input type="submit" value="Submit" onclick="add_number()">
+            </p>
+            <p>
+                <label for="sum">Sum:</label>
+                <input class="textformat" type="text" id="sum" name="sum" readonly>
+            </p>
+            <p>
+                <label for="difference">Difference:</label>
+                <input class="textformat" type="text" id="difference" name="difference" readonly>
+            </p>
+            <p>
+                <label for="quotient">Quotient:</label>
+                <input class="textformat" type="text" id="quotient" name="quotient" readonly>
+            </p>
+                <label for="remainder">Remainder:</label>
+                <input class="remainder" type="text" id="remainder" name="remainder" readonly>
+            <p>
+                <label for="product">Product:</label>
+                <input class="textformat" type="text" id="product" name="product" readonly>
+            </p>
+            <p>
+                <input type="button" value="Refresh" onclick="refresh_form()">
+            </p>
+            <p>
+                <input type="button" class="back" value="GoBack" onclick="goBack()">
+            </p>
+            <p>
+                <input type="button" style="background-color:red;" value="Log out" onclick= "logout_form()">
+            </p>
+        </form>
+    </div>
+</body>
+
+</html>

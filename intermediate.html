@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WHERE DO YOU WANT TO GO</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .box {
+            border: 2px solid black;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+            text-align: center;
+            background-color: #f9f9f9;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .box input[type="text"],
+        .box input[type="password"],
+        .box input[type="button"],
+        .box input[type="submit"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        .box input[type="button"] {
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .box input[type="button"]:hover {
+            opacity: 0.9;
+            transform: scale(1.03);
+        }
+
+        .box input[type="button"]:first-of-type {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .box input[type="button"]:nth-of-type(2) {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .box input[type="button"]:nth-of-type(3) {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .box input[type="button"].logout {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+    <script type="text/javascript">
+        function checkDetails(page) 
+        {
+           if (page == 'MyCal') 
+            {
+                window.location.replace("trial.html");
+            }
+            else if (page == 'other_calculation') 
+            {
+                window.location.replace("other_calculation.html");
+            }
+            else if (page == 'Weather') 
+            {
+                window.location.replace("copycode.html");
+            }
+        }
+           
+
+        function logout_form() {
+            window.location.replace("login.html");
+        }
+    </script>
+</head>
+
+<body>
+    <div class="box">
+        <form method="post" onsubmit="return false;">
+           
+            <p>
+                <input type="button" value="Arithmetic Calculator" onclick="checkDetails('MyCal')">
+            </p>
+            <p>
+                <input type="button" value="Advanced Calculator" onclick="checkDetails('other_calculation')">
+            </p>
+            <p>
+                <input type="button" value="Weather Forecast" onclick="checkDetails('Weather')">
+            </p>
+            <p>
+                <input type="button" class="logout" value="Log out" onclick="logout_form()">
+            </p>
+        </form>
+    </div>
+</body>
+
+</html>

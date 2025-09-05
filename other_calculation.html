@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cozy Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f7f7f7, #eaeaea);
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        .box {
+            background-color: #ffffff;
+            border: none;
+            padding: 20px;
+            width: 280px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .box h2 {
+            color: #007bff;
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .box label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 14px;
+        }
+        .box input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0;
+            border: 1px solid #dcdfe6;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+            text-align: center;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            align-content: center;
+            box-align: center;
+        }
+        .box input[type="button"],
+        .box input[type="submit"] {
+            width: 48%;
+            padding: 8px;
+            margin: 6px 1%;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .box input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+        }
+        .box input[type="button"].refresh {
+            background-color: #17a2b8;
+            color: white;
+        }
+        .box input[type="button"].logout {
+            background-color: #dc3545;
+            color: white;
+        }
+        .box input[type="button"].back {
+            background-color: #ffc107;
+            color: white;
+        }
+        .box input[type="button"]:hover,
+        .box input[type="submit"]:hover {
+            opacity: 0.9;
+            transform: scale(1.03);
+        }
+    </style>
+    <script type="text/javascript">
+        function performSquareRoot() 
+        {
+            var number = parseFloat(document.getElementById("no").value);
+            if (isNaN(number)) {
+                alert("Please enter a valid number.");
+                return;
+            }
+            var result = Math.sqrt(number);
+            document.getElementById("ans").value = result;
+        }
+        function performCubeRoot() 
+        {
+            var number = parseFloat(document.getElementById("no").value);
+            if (isNaN(number)) {
+                alert("Please enter a valid number.");
+                return;
+            }
+            var result = Math.cbrt(number);
+            document.getElementById("ans").value = result;
+        }
+        function performLog() 
+        {
+            var number = parseFloat(document.getElementById("no").value);
+            if (isNaN(number)) {
+                alert("Please enter a valid number.");
+                return;
+            }
+            var result = Math.log(number);
+            document.getElementById("ans").value = result;
+        }
+        function performSin() 
+        {
+            var number = parseFloat(document.getElementById("no").value);
+            if (isNaN(number)) {
+                alert("Please enter a valid number.");
+                return;
+            }
+            var result = Math.sin(number * Math.PI / 180);
+            document.getElementById("ans").value = result;
+        }
+        function performCos() 
+        {
+            var number = parseFloat(document.getElementById("no").value);
+            if (isNaN(number)) {
+                alert("Please enter a valid number.");
+                return;
+            }
+            var result = Math.cos(number * Math.PI / 180);
+            document.getElementById("ans").value = result;
+        }
+        function performTan() 
+        {
+            var number = parseFloat(document.getElementById("no").value);
+            if (isNaN(number)) {
+                alert("Please enter a valid number.");
+                return;
+            }
+            var result = Math.tan(number * Math.PI / 180);
+            document.getElementById("ans").value = result;
+        }
+        function performCot() 
+        {
+            var number = parseFloat(document.getElementById("no").value);
+            if (isNaN(number)) {
+                alert("Please enter a valid number.");
+                return;
+            }
+            var result = 1 / Math.tan(number * Math.PI / 180);
+            document.getElementById("ans").value = result;
+        }
+        function refresh_form()
+        {
+            document.getElementById("no").value = '';
+            document.getElementById("ans").value = '';
+        }
+        function logout_form() 
+        {
+            window.location.replace("login.html");
+        }
+        function goBack() 
+        {
+            window.location.replace("intermediate.html");
+        }
+    </script>
+</head>
+<body>
+    <div class="box">
+        <h2>Advanced Calculator</h2>
+        <p>
+            <label for="no">Number:</label>
+            <input class="textformat" type="text" id="no" name="no">
+        </p>
+        <div class="grid-container">
+            <input type="submit" value="√" onclick="performSquareRoot()">
+            <input type="submit" value="∛" onclick="performCubeRoot()">
+            <input type="submit" value="log" onclick="performLog()">
+            <input type="submit" value="sin" onclick="performSin()">
+            <input type="submit" value="cos" onclick="performCos()">
+            <input type="submit" value="tan" onclick="performTan()">
+            <input type="submit" value="cot" onclick="performCot()">
+        </div>
+        <p>
+            <label for="ans">Answer:</label>
+            <input class="textformat" type="text" id="ans" name="ans">
+        </p>
+        <p>
+            <input type="button" class="refresh" value="Refresh" onclick="refresh_form()">
+        </p>
+        <p>
+            <input type="button" class="logout" value="Log out" onclick="logout_form()">
+        </p>
+        <p>
+            <input type="button" class="back" value="GoBack" onclick="goBack()">
+        </p>
+    </div>
+</body>
+</html>

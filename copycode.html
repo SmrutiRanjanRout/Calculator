@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #f0f8ff, #add8e6);
+            margin: 0;
+        }
+        .weather-container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        .weather-info {
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #dcdfe6;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .box input[type="button"].back {
+            background-color: #ffc107;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+        }
+        .box input[type="button"].back:hover {
+            background-color: #e0a800;
+            transform: scale(1.05);
+        }
+        .weather-info div {
+            margin: 5px 0;
+            color: #555;
+        }
+    </style>
+    <script>
+        async function getWeather() {
+            const city = document.getElementById('city').value;
+            if (!city) return alert('Please enter a city name');
+
+            try {
+                const geoResponse = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`);
+                if (!geoResponse.ok) throw new Error('City not found');
+                
+                const geoData = await geoResponse.json();
+                if (geoData.results.length === 0) throw new Error('City not found');
+                
+                const { latitude, longitude } = geoData.results[0];
+
+                const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`);
+                if (!weatherResponse.ok) throw new Error('Weather data not found');
+                
+                const weatherData = await weatherResponse.json();
+                displayWeather(city, weatherData);
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+
+        function displayWeather(city, data) {
+            const weatherInfo = document.getElementById('weather-info');
+            const weather = data.current_weather;
+            weatherInfo.innerHTML = `
+                <div>City: ${city}</div>
+                <div>Temperature: ${weather.temperature} °C</div>
+                <div>Weather: ${weather.weathercode}</div>
+                <div>Wind Speed: ${weather.windspeed} m/s</div>
+            `;
+        }
+        function goBack() {
+            window.location.replace("intermediate.html");
+        }
+    </script>
+</head>
+<body>
+    <div class="weather-container">
+        <h1>Weather App</h1>
+        <input type="text" id="city" placeholder="Enter city name" />
+        <button onclick="getWeather()">Get Weather</button>
+        <div class="weather-info" id="weather-info">
+            <!-- Weather details will be displayed here -->
+        </div>
+        <div class="box">
+            <input type="button" class="back" value="Back" onclick="goBack()">
+        </div>
+    </div>
+</body>
+</html>

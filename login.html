@@ -1,0 +1,84 @@
+<html>
+
+<head>
+    <title>Login Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            border: 2px solid black;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .box input[type="text"],
+        .box input[type="password"],
+        .box input[type="submit"] {
+            width: calc(100% - 20px);
+            padding: 5px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+
+        .box input[type="submit"]{
+            background-color: green;
+            color: white;
+        }
+
+        .textformat {
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        function checkDetails() 
+        {
+            var username = document.getElementById('uid').value;
+            var password = document.getElementById('pass').value;
+           
+            if (username == 'abcd' && password == 'admin123') {
+                window.location.replace("intermediate.html");
+
+            }
+            else {
+                alert('Invalid username or password.');
+            }
+        }
+        function reset_form() {
+            document.getElementById("uid").value = '';
+            document.getElementById("pass").value = '';
+        }
+    </script>
+</head>
+
+<body>
+    <div class="box">
+        <form method="post" onsubmit="return false;">
+            <u>
+                <h2>Login</h2>
+            </u>
+            <p>
+                <label for="uid">Username:</label>
+                <input class="textformat" type="text" id="uid" name="UserID">
+            </p>
+            <p>
+                <label for="pass">Password:</label>
+                <input class="textformat" type="password" id="pass" name="Password">
+            </p>
+            <p>
+                <input type="submit" value="Submit" onclick="checkDetails()">
+            </p>
+            <p>
+                <input type="submit" value="Reset" onclick="reset_form()">
+            </p>
+        </form>
+    </div>
+
+</body>
+
+</html>
